@@ -27,7 +27,12 @@ EOSQL
 "
 ```
 
-```
-docker build -t myeung/nodeapp:v0.1 . 
-docker run --rm -p 8080:8080 myeung/nodeapp:v0.1
+```shell
+npm install
+node index2.js
+
+docker build -t quay.io/myeung/fruit-app-nodejs:v0.0.1 . 
+docker run --rm -p quay.io/myeung/fruit-app-nodejs:v0.0.1
+
+docker push quay.io/myeung/fruit-app-nodejs:v0.0.1
 ```
