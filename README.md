@@ -26,3 +26,8 @@ INSERT into names(name) values ('Alex'), ('Mike'), ('Roger');
 EOSQL
 "
 ```
+
+```
+docker build -t myeung/nodeapp:v0.1 . 
+docker run --rm -p 8080:8080 myeung/nodeapp:v0.1
+```
