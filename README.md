@@ -8,7 +8,7 @@ $ docker build -t mypg:01 .
 # run 
 $ docker run \
   --env-file .env \
-  --name postgres \
+  --name web-postgres \
   -d \
   -p 5432:5432 \
   mypg:01 \
@@ -16,7 +16,7 @@ $ docker run \
   -c ssl_cert_file=/var/lib/postgresql/server.crt \
   -c ssl_key_file=/var/lib/postgresql/server.key 
 
-$ docker exec postgres bash -c "psql -U \$POSTGRES_USER <<-EOSQL
+$ docker exec web-postgres bash -c "psql -U \$POSTGRES_USER <<-EOSQL
 /* Create Data Structures */
 CREATE DATABASE \$POSTGRES_DB; 
 
@@ -61,4 +61,15 @@ docker push quay.io/myeung/fruit-app-nodejs:v0.0.1
 docker-compose up
 docker-compose up --build
 docker-compose down --rmi all
+
+# DB app with postgresql
+$ docker-compose -f dc-db-app.yml up --build
+
+$ docker exec -it web-postgres /bin/bash -c "PGPASSWORD=postgres psql -d express -U postgres"
+# run DB init
+
+# 
+localhost:8081/hi
+localhost:8081/load
+
 ```
