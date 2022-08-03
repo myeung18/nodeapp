@@ -4,7 +4,7 @@ USER 65532:65532
 
 WORKDIR /app
 COPY ./package.json ./
-COPY ./idx_redis.js ./
+COPY ./index2.js ./
 
 USER 0
 RUN npm install
@@ -12,4 +12,4 @@ RUN npm install
 COPY ./ ./
 
 EXPOSE 8081
-CMD ["node", "idx_redis.js"]
+CMD ["node", "index2.js"]

@@ -2,7 +2,21 @@
 ### https://www.conjur.org/blog/smart-secrets-management-using-conjur-and-secretless-broker/
 
 ```
-docker exec postgres bash -c "psql -U \$POSTGRES_USER <<-EOSQL
+# build
+$ docker build -t mypg:01 .
+
+# run 
+$ docker run \
+  --env-file .env \
+  --name postgres \
+  -d \
+  -p 5432:5432 \
+  mypg:01 \
+  -c ssl=on \
+  -c ssl_cert_file=/var/lib/postgresql/server.crt \
+  -c ssl_key_file=/var/lib/postgresql/server.key 
+
+$ docker exec postgres bash -c "psql -U \$POSTGRES_USER <<-EOSQL
 /* Create Data Structures */
 CREATE DATABASE \$POSTGRES_DB; 
 
@@ -25,9 +39,17 @@ INSERT into names(name) values ('Alex'), ('Mike'), ('Roger');
 
 EOSQL
 "
+
+# run node app
+node index.js
+
 ```
 
 ```shell
+#
+npm insteall pg dotenv --save
+
+#
 npm install
 node index2.js
 
@@ -35,4 +57,8 @@ docker build -t quay.io/myeung/fruit-app-nodejs:v0.0.1 .
 docker run --rm -p quay.io/myeung/fruit-app-nodejs:v0.0.1
 
 docker push quay.io/myeung/fruit-app-nodejs:v0.0.1
+
+docker-compose up
+docker-compose up --build
+docker-compose down --rmi all
 ```
