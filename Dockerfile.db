@@ -1,8 +1,0 @@
-FROM postgres:11-alpine
-
-COPY pg_server.key /var/lib/postgresql/server.key
-COPY pg_server.crt /var/lib/postgresql/server.crt
-
-# update the privileges on the .key, no need to touch the .crt  
-RUN chmod 600 /var/lib/postgresql/server.key
-RUN chown postgres:postgres /var/lib/postgresql/server.key
