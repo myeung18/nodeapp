@@ -25,18 +25,16 @@ app.use(express.static('.'));
 
 app.get('/load', (req, res) => {
     const pool = new Pool(config)
-    pool.connect()
-    .then(client => {
-    console.log('connected')
+    pool.connect().then(client => {
+        console.log('connected')
         // promise
-    client.query('SELECT * FROM names')
+        client.query('SELECT * FROM names')
         .then(res => {
         console.log(res.rows)
         client.release();
         })
-    .catch(e => console.error(e.stack))
-    })
-    .catch(err => console.error('error connecting', err.stack))
+        .catch(e => console.error(e.stack))
+    }).catch(err => console.error('error connecting', err.stack))
     .then(() => pool.end())
 });
 

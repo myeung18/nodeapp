@@ -1,10 +1,12 @@
-const person = {
-    name: "max",
-    age: 29,
-    greet() {
-        console.log("hi this is " + this.name);
-    }
-}
+const fs = require("fs")
 
+const {
+    person,
+    add
+} = require("./utils")
 
-person.greet();
+setTimeout(() => {
+    person.greet()
+}, 500)
+
+console.log(add(3, 4))

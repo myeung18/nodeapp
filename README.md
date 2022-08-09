@@ -53,7 +53,11 @@ node index.js
 
 ```shell
 #
-npm insteall pg dotenv --save
+npm init
+npm install pg dotenv --save
+
+# e.g.: npm i validator@10.8.0
+# e.g.: npm i nodemon@xxx -g
 
 # Misc Commands
 npm install

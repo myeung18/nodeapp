@@ -2,11 +2,15 @@ FROM registry.access.redhat.com/ubi8/nodejs-14:1 AS BUILD_IMAGE
 
 USER 65532:65532
 
+WORKDIR /bindings
+COPY ./bindings ./
+
 WORKDIR /app
 COPY ./package.json ./
 COPY ./app.js ./
 COPY ./index.html ./
 COPY ./.env ./
+
 
 USER 0
 RUN npm install
