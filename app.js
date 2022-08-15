@@ -47,7 +47,7 @@ app.get('/hi', (req, res) => {
     res.send("hi from there. ");
 });
 
-app.use(express.static('.'));
+app.use(express.static('public'));
 
 app.get('/load', (req, res) => {
     (async () => {
