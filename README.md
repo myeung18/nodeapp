@@ -55,6 +55,7 @@ node index.js
 #
 npm init
 npm install pg dotenv --save
+npm v node-uuid
 
 # e.g.: npm i validator@10.8.0
 # e.g.: npm i nodemon@xxx -g

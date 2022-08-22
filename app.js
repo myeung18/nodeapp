@@ -4,8 +4,11 @@ const fs = require('fs')
 const express = require('express');
 const app = express();
 
+const {Pool} = require('pg');
+
 const pgBinding = require("kube-service-bindings")
 let bindingInfo;
+
 try {
     bindingInfo = pgBinding.getBinding('POSTGRESQL', 'pg-crdb')
 
@@ -13,8 +16,6 @@ try {
 } catch (err) {
     console.log(err)
 }
-
-const {Pool} = require('pg');
 
 var config = {
     user: process.env.APPLICATION_DB_USER,
@@ -36,7 +37,6 @@ config = {
     sslrootcert: '/home/myeung/mygit/todel/kube-service-bindings/bindings/crdb/root.crt',
     type: 'postgresql',
     user: 'marco'
-
 }
 
 app.get('/hi', (req, res) => {
@@ -46,7 +46,6 @@ app.get('/hi', (req, res) => {
     console.log(process.env.APPLICATION_DB_INITIAL_PASSWORD)
     res.send("hi from there. ");
 });
-
 app.use(express.static('public'));
 
 app.get('/load', (req, res) => {
